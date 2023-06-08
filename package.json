@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Food delivery app built using react",
   "scripts": {
-    "start": "parcel index.html",
+    "start": "parcel index.html --port 3003",
     "build": "parcel build index.html",
     "test": "jest"
   },
