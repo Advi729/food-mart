@@ -21,7 +21,7 @@ a {
     width: 200px;
     border: solid black 1px;
     padding: 10px;
-    margin: 10px;
+    margin: 8px;
 }
 
 .card img {
@@ -31,5 +31,13 @@ a {
 .restaurant-list {
     display: flex;
     flex-wrap: wrap;
+}
+
+.shimmer-card {
+    width: 200px;
+    height: 300px;
+    padding: 10px;
+    margin: 8px;
+    background: grey;
 }
 
