@@ -7,4 +7,11 @@
 
 .card img {
     width: 100%;
+    height: 160px;
 }
+
+.restaurant-menu-cards {
+    display: flex;
+    flex-wrap: wrap;
+}
+

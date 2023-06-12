@@ -3,6 +3,7 @@ import './Body.css';
 import { hotelData } from '../../constants';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
 import ShimmerUI from '../ShimmerUI/ShimmerUI';
+import { Link } from 'react-router-dom';
 
 function filterData(searchText, restaurants) {
   const filteredData = restaurants.filter((restaurant) =>
@@ -66,7 +67,9 @@ const Body = () => {
             <h1>No restaurants found!!</h1>
           ) : (
             filteredRestaurants.map((hotel) => {
-              return <RestaurantCard {...hotel.data} key={hotel.data.id} />;
+              return (
+                <Link to={'/restaurant/' + hotel.data.id} key={hotel.data.id} className="link-style"><RestaurantCard {...hotel.data} /></Link>             
+              )
             })
           )
         }
