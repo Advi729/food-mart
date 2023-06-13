@@ -1,5 +1,7 @@
 export const IMG_URL_CDN = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_508,h_320,c_fill/';
 export const MENU_IMG_URL_CDN = 'https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_208,h_208,c_fit/';
+export const RESTAURANT_MENU_CDN_FIRST_PART = 'https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.9367552&lng=76.3180429&restaurantId=';
+export const RESTAURANT_MENU_CDN_SECOND_PART = '&submitAction=ENTER';
 // restaurant hard coded card
 export const hotelData = [
     {

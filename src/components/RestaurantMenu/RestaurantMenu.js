@@ -2,24 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import './RestaurantMenu.css';
 import { IMG_URL_CDN, MENU_IMG_URL_CDN } from "../../constants";
+import useRestaurantInfo from "../../utils/useRestaurantInfo";
 
 const RestaurantMenu = () => {
     const { id } = useParams();
-    const [restaurant, setRestaurant] = useState({});
-    const [menu, setMenu] = useState([]);
-    console.log('rs: ', restaurant);
-    useEffect(() => {
-        getRestaurantInfo();
-    }, []);
-
-    async function getRestaurantInfo() {
-        const data = await fetch(`https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=9.9367552&lng=76.3180429&restaurantId=${id}&submitAction=ENTER`);
-        const json = await data.json();
-        console.log(json?.data?.cards[0]?.card?.card?.info);
-        console.log(json?.data?.cards);
-        setRestaurant(json?.data?.cards[0]?.card?.card?.info);
-        setMenu(json?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR.cards[2]?.card?.card?.itemCards);
-    }
+    const [restaurant, menu] = useRestaurantInfo(id);
 
     return (
         <div className="restaurant-info">
@@ -35,14 +22,18 @@ const RestaurantMenu = () => {
             <div className="restaurant-menu-cards">
                 {
                     menu?.map((item) => {
-                        console.log('item: ', item?.card?.info?.imageId);
+                        // console.log('item: ', item?.card?.info?.imageId);
+                        const price = parseFloat(item?.card?.info?.price) / 100;
+                        const defaultPrice = parseFloat(item?.card?.info?.defaultPrice) / 100;
+                        const formattedPrice = isNaN(price) ? defaultPrice.toFixed(2) : price.toFixed(2);
+                        console.log(price, defaultPrice, formattedPrice);
                         return (
                             <div className="card" key={item?.card?.info?.id}>
                             <img src={MENU_IMG_URL_CDN + item?.card?.info?.imageId} />
                             <h2>{item?.card?.info?.name}</h2>
                             <h3>{item?.card?.info?.description}</h3>
                             <h4>{item?.card?.info?.category}</h4>
-                            <h4>₹ {(item?.card?.info?.price) ? (item?.card?.info?.price) : (item?.card?.info?.defaultPrice)}</h4>
+                            <h4>₹ {formattedPrice}</h4>
                             </div>
                         );
                     })

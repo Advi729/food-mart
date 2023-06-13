@@ -4,14 +4,8 @@ import { hotelData } from '../../constants';
 import RestaurantCard from '../RestaurantCard/RestaurantCard';
 import ShimmerUI from '../ShimmerUI/ShimmerUI';
 import { Link } from 'react-router-dom';
-
-function filterData(searchText, restaurants) {
-  const filteredData = restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase()?.includes(searchText?.toLowerCase())
-  );
-  console.log('filtered:', filteredData);
-  return filteredData;
-}
+import { filterData } from '../../utils/helper';
+import useOnline from '../../utils/useOnline';
 
 const Body = () => {
   const [searchText, setSearchText] = useState(''); // local state variable
@@ -30,6 +24,11 @@ const Body = () => {
     console.log('json: ', json);
     setAllRestaurants(json?.data?.cards[2]?.data?.data?.cards);
     setFilteredRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+  }
+
+  const isOnline = useOnline();
+  if(!isOnline) {
+    return <h1>You are offline, Please check your internet connection!</h1>
   }
 
   // Not render component (Early return)
