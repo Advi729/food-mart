@@ -3,7 +3,7 @@ import userContext from '../context';
 
 const Footer = () => {
   const user = useContext(userContext);
-  console.log(user);
+  // console.log(user);
   return <h4>Footer</h4>;
 };
 
