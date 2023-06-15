@@ -38,18 +38,19 @@ const Body = () => {
     <ShimmerUI />
   ) : (
     <>
-      <div className="search-container">
+      <div className="search-container flex justify-center m-2">
         <input
           type="text"
-          className="search-input"
+          className="search-input bg-slate-200  border-cyan-100"
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
             setSearchText(e.target.value);
           }}
         />
+      
         <button
-          className="search-btn"
+          className="search-btn pl-1 pr-1 ml-3 rounded bg-slate-300"
           onClick={() => {
             const updateData = filterData(searchText, allRestaurants);
             console.log(updateData);
@@ -59,7 +60,7 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="restaurant-list ml-5 flex justify-self-center">
         {
           // If no restaurants found
           filteredRestaurants?.length === 0 ? (

@@ -37,15 +37,16 @@ const Header = () => {
       };
 
      return (
+      <div className="shadow-md">
         <div className='header'>
-        <Link to='/'><h1>Food mart</h1></Link>
+        <Link to='/'><h1 className="font-bold text-2xl text-lime-800">Food mart</h1></Link>
         <div className='nav-items'>
             <ul>
                 <li><Link to='/'>Home</Link></li>
                 <li><Link to='/about'>About</Link></li>
                 <li><Link to=''>Contact</Link></li>
                 <li><Link to=''>Cart</Link></li> 
-                <li><Link to='/signup'>Sign Up</Link></li>  
+                <li><Link to='/profile'>Profile</Link></li>  
                 {
                   isLoggedIn ? <li className="logout" onClick={handleLogout}><Link>Log out</Link></li> 
                   : <li><Link to='/login'>Log In</Link></li>
@@ -55,16 +56,18 @@ const Header = () => {
         <div className="profile">
         { user && 
         <>
-        <span className="welcome">Welcome {user?.firstname}!  </span>
-        <Link to='/profile' ><img
+        <span className="m-4">Welcome {user?.firstname}!  </span>
+        {/* <Link to='/profile' ><img
             className="img rounded-circle" src={avatar}
             width="30em" alt="Profile"/>
-        </Link>
+        </Link> */}
         </>
         }
       
         </div>
-    </div>)
+    </div>
+    </div>
+    )
 };
 
 export default Header;

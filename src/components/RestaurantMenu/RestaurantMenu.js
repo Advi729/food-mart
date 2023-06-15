@@ -9,7 +9,7 @@ const RestaurantMenu = () => {
     const [restaurant, menu] = useRestaurantInfo(id);
 
     return (
-        <div className="restaurant-info">
+        <div className="restaurant-info flex justify-items-center">
             <div>
                 <h1>Restaurant id: {restaurant?.id}</h1>
                 <h2>{restaurant?.name}</h2>
