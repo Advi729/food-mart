@@ -9,17 +9,56 @@ const RestaurantMenu = () => {
     const [restaurant, menu] = useRestaurantInfo(id);
 
     return (
-        <div className="restaurant-info flex justify-items-center">
-            <div>
-                <h1>Restaurant id: {restaurant?.id}</h1>
-                <h2>{restaurant?.name}</h2>
-                <img src={IMG_URL_CDN + restaurant?.cloudinaryImageId} />
-                <h3>{restaurant?.areaName}</h3>
-                <h3>{restaurant?.city}</h3>
-                <h3>{restaurant?.avgRating} stars</h3>
-                <h3>{restaurant?.costForTwoMessage}</h3>
+<>  
+ <div className="flex justify-center">
+        <div className="lg:flex lg:items-center lg:justify-center">
+      <div className="min-w-0 flex-1">
+        <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        {restaurant?.name}
+        </h2>
+        <div className="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <div className="mr-1.5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" >
+            {restaurant?.id}
             </div>
-            <div className="restaurant-menu-cards">
+          </div>
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <div className="mr-1.5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" >
+            {restaurant?.areaName}
+            </div>
+          </div>
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <div className="mr-1.5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" >
+            {restaurant?.city}
+            </div>
+          </div>
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <p className="mr-1.5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" >
+            {restaurant?.avgRating} stars
+            </p>
+          </div>
+          <div className="mt-2 flex items-center text-sm text-gray-500">
+            <p className="mr-1.5 h-5 flex-shrink-0 text-gray-400" aria-hidden="true" >
+            {restaurant?.costForTwoMessage}
+            </p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+        <div className="restaurant-info mt-4">
+            <div className="flex justify-center mb-5">
+                <img className="rounded-lg" src={IMG_URL_CDN + restaurant?.cloudinaryImageId} />
+            </div>
+            {/* <div className="lg:flex lg:items-center lg:justify-center"> */}
+      <div className="ml-7 min-w-0 flex-1">
+        <h3 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+         Menu
+        </h3>
+        </div>
+        {/* </div> */}
+            <div className="restaurant-menu-cards flex justify center mr-3 ml-3">
                 {
                     menu?.map((item) => {
                         // console.log('item: ', item?.card?.info?.imageId);
@@ -28,7 +67,7 @@ const RestaurantMenu = () => {
                         const formattedPrice = isNaN(price) ? defaultPrice.toFixed(2) : price.toFixed(2);
                         console.log(price, defaultPrice, formattedPrice);
                         return (
-                            <div className="card" key={item?.card?.info?.id}>
+                            <div className="card bg-gray-50 ml-2 mr-2 shadow-xl" key={item?.card?.info?.id}>
                             <img src={MENU_IMG_URL_CDN + item?.card?.info?.imageId} />
                             <h2>{item?.card?.info?.name}</h2>
                             <h3>{item?.card?.info?.description}</h3>
@@ -40,6 +79,8 @@ const RestaurantMenu = () => {
                 } 
             </div> 
         </div>
+        
+</>
     );
 }
 

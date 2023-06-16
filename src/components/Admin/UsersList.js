@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import editIcon from '../../../public/icons/edit.png';
 import deleteIcon from '../../../public/icons/delete.png';
 import { filterUsersList } from "../../utils/helper";
+import { Link } from "react-router-dom";
 
 
 const UsersList = () => {
@@ -28,49 +29,85 @@ const UsersList = () => {
             const response = await fetch('http://localhost:3000/api/admin/delete-user/'+id);
             const result = await response.json();
             console.log(result);
+            if(result) {
+                window.location.reload();
+            }
         } catch (error) {
             console.error('error in deleteuser: ', error);
         }
     };
 
   return (
-    <>
-        <h2>Users list</h2>
-        <div>
-            <input type="text" onChange={(e) => setSearchText(e.target.value)} placeholder="Search"/>
-            <button onClick={() => {
+<>
+    
+    <div className="ml-7 min-w-0 flex justify-center">
+        <h3 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+        Users list
+        </h3>
+    </div>
+
+        <div className="flex justify-center m-2">
+            <input type="text" className=" bg-slate-200  border-cyan-100" onChange={(e) => setSearchText(e.target.value)} placeholder="Search"/>
+            <button className="pl-1 pr-1 ml-3 rounded bg-slate-300" onClick={() => {
                 const updatedData = filterUsersList(searchText, usersList);
                 setFilteredUsersList(updatedData);
             }}>Search</button>
         </div>
-        <table>
-            <thead>
-                <tr>
-                    <th>Sl. no.</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    {/* <th>Edit</th> */}
-                    <th>Delete</th>
-                </tr>
-            </thead>
-            <tbody>
-                {
+        
+
+  <div className="flex justify-center">     
+<div className="relative w-4/5  overflow-x-auto shadow-md sm:rounded-lg">
+    <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" className="px-6 py-3">
+                    Sl.no.
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Name
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Email
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    Phone
+                </th>
+                <th scope="col" className="px-6 py-3">
+                    <span className="sr-only">Delete</span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+        {
                     filteredUsersList?.map((user, index) => {
                         return(
-                            <tr key={user._id}>
-                                <td>{index + 1}</td>
-                                <td>{user.firstname + ' ' + user.lastname}</td>
-                                <td>{user.email}</td>
-                                <td>{user.phone}</td>
-                                {/* <td><img src={editIcon} style={{width: '25px'}}/></td> */}
-                                <td><img src={deleteIcon} style={{width: '25px'}} onClick={() => deleteUser(user._id)}/></td>
-                            </tr>
-                        );
-                    })
-                }
-            </tbody>
-        </table>
+            <tr key={user._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                <td className="px-6 py-4">
+                {index + 1}
+                </td>
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {user.firstname + ' ' + user.lastname}
+                </th>
+                <td className="px-6 py-4">
+                {user.email}
+                </td>
+                <td className="px-6 py-4">
+                {user.phone}
+                </td>
+                <td className="px-6 py-4 text-right">
+                    <Link onClick={() => deleteUser(user._id)} className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</Link>
+                    {/* <img src={deleteIcon} style={{width: '25px'}} onClick={() => deleteUser(user._id)}/> */}
+                </td>
+            </tr>
+           
+        
+);
+})
+}
+        </tbody>
+    </table>
+</div>
+</div> 
     </>
   )
 }

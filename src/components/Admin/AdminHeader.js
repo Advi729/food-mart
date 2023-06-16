@@ -10,6 +10,9 @@ const AdminHeader = () => {
     const navigate = useNavigate();
     const isLoggedIn = useSelector(store => store.admin.isLoggedIn);
     const admin = useSelector(store => store.admin.admin);
+    // if(!isLoggedIn && admin === null) {
+    //   navigate('/admin/login');
+    // }
     console.log('islogheaderadmmm: ', isLoggedIn);
     console.log('user inheaderradfmmmm: ', admin);
     const dispatch = useDispatch();
@@ -34,8 +37,9 @@ const AdminHeader = () => {
       };
 
      return (
-        <div className='header'>
-        <Link to='/admin/dashboard' ><h1>Food mart Dashboard</h1></Link>
+      <div className="shadow-md">
+        <div className='header h-14'>
+        <Link to='/admin/dashboard' ><h1 className="font-bold text-2xl text-lime-800">FoodMart Dashboard</h1></Link>
         <div className='nav-items'>
             <ul>
                 <li><Link to='/admin/dashboard'>Dashboard</Link></li>
@@ -49,16 +53,18 @@ const AdminHeader = () => {
         <div className="profile">
         { admin && 
         <>
-        <span className="welcome">Welcome {admin?.firstname}!  </span>
-        <img
+        <span className="welcome m-4">Welcome {admin?.firstname}!  </span>
+        {/* <img
             className="img rounded-circle" src={avatar}
-            width="30em" alt="Profile"/>
+            width="30em" alt="Profile"/> */}
 
         </>
         }
       
         </div>
-    </div>)
+    </div>
+    </div>
+    )
 };
 
 export default AdminHeader;

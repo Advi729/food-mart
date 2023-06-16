@@ -7,11 +7,11 @@ import store from "../store/store";
 function Home() {
     return (
         <>
-        <Provider store={store}>
+        {/* <Provider store={store}> */}
             <Header/>
             <Outlet/>
             <Footer/>
-        </Provider>
+        {/* </Provider> */}
         </>
     );
 };

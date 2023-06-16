@@ -38,8 +38,8 @@ const Header = () => {
 
      return (
       <div className="shadow-md">
-        <div className='header'>
-        <Link to='/'><h1 className="font-bold text-2xl text-lime-800">Food mart</h1></Link>
+        <div className='header h-14'>
+        <Link to='/'><h1 className="font-bold text-2xl text-lime-800">FoodMart</h1></Link>
         <div className='nav-items'>
             <ul>
                 <li><Link to='/'>Home</Link></li>
